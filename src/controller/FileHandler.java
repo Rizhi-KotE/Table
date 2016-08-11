@@ -36,15 +36,13 @@ public class FileHandler implements Observer{
     private MainWindow mainWindow;
     private StudentTableWithPaging studentTableWithPaging;
     private TableModel tableModel;
-    private final String message_2;
-    private final String message_3;
-    private final String error;
+    private String message_2;
+    private String message_3;
+    private String error;
 
 
     public FileHandler(Internationalization internationalization){
-        message_2 = internationalization.getLang().getString("message_2");
-        message_3 = internationalization.getLang().getString("message_3");
-        error = internationalization.getLang().getString("error");
+        this.internationalization = internationalization;
     }
 
     private void setMainWindow(MainWindow mainWindow) {
@@ -148,6 +146,8 @@ public class FileHandler implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
-
+        message_2 = internationalization.getLang().getString("message_2");
+        message_3 = internationalization.getLang().getString("message_3");
+        error = internationalization.getLang().getString("error");
     }
 }

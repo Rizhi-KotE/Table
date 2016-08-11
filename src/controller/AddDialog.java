@@ -1,6 +1,9 @@
 package controller;
 
-import model.*;
+import model.Examination;
+import model.Student;
+import model.TableModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,16 +12,12 @@ import java.util.*;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class AddDialog implements Observer{
+public class AddDialog implements Observer {
     private static Internationalization internationalization = new Internationalization();
-    private static  String LAST_NAME = internationalization.getLang().getString("last_name");
-    private static  String FIRST_NAME = internationalization.getLang().getString("first_name");
-    private static  String MIDDLE_NAME = internationalization.getLang().getString("middle_name");
-    private static  String GROUP = internationalization.getLang().getString("group");
-    private StudentTableWithPaging studentTableWithPaging;
-    private TableModel tableModel;
-    private Map<String, JTextField> fieldID = new HashMap<String, JTextField>();
-    private Map<JTextField, JComboBox> examinationsMap = new HashMap<JTextField, JComboBox>();
+    private static String LAST_NAME = internationalization.getLang().getString("last_name");
+    private static String FIRST_NAME = internationalization.getLang().getString("first_name");
+    private static String MIDDLE_NAME = internationalization.getLang().getString("middle_name");
+    private static String GROUP = internationalization.getLang().getString("group");
     public JFrame frame = new JFrame(internationalization.getLang().getString("add_st"));
     public JLabel labelText = new JLabel(internationalization.getLang().getString("add_new_st"));
     public JLabel labelText1 = new JLabel(internationalization.getLang().getString("examinations"));
@@ -26,6 +25,10 @@ public class AddDialog implements Observer{
     public JLabel labelText3 = new JLabel(internationalization.getLang().getString("mark"));
     public String message_1 = internationalization.getLang().getString("message_1");
     public String error = internationalization.getLang().getString("error");
+    private StudentTableWithPaging studentTableWithPaging;
+    private TableModel tableModel;
+    private Map<String, JTextField> fieldID = new HashMap<String, JTextField>();
+    private Map<JTextField, JComboBox> examinationsMap = new HashMap<JTextField, JComboBox>();
 
     public AddDialog(StudentTableWithPaging studentTableWithPaging) {
         this.studentTableWithPaging = studentTableWithPaging;
@@ -37,32 +40,32 @@ public class AddDialog implements Observer{
         frame.setVisible(true);
     }
 
-    private JFrame createFrame(){
+    private JFrame createFrame() {
         JPanel jPanelID = new JPanel();
         jPanelID.setLayout(new GridBagLayout());
         labelText.setHorizontalAlignment(JLabel.CENTER);
-        AddComponent.add(jPanelID,labelText, 0, 0, 2, 1);
+        AddComponent.add(jPanelID, labelText, 0, 0, 2, 1);
         String[] labelString = {LAST_NAME, FIRST_NAME, MIDDLE_NAME, GROUP};
         for (int field = 0; field < labelString.length; field++) {
             labelText = new JLabel(labelString[field]);
             AddComponent.add(jPanelID, labelText, 0, field + 1, 1, 1);
             JTextField jtfField = new JTextField(30);
-            fieldID.put(labelString[field],jtfField);
+            fieldID.put(labelString[field], jtfField);
             AddComponent.add(jPanelID, jtfField, 1, field + 1, 1, 1);
         }
         labelText1.setHorizontalAlignment(JLabel.CENTER);
-        AddComponent.add(jPanelID,labelText1, 0, 5, 2, 1);
+        AddComponent.add(jPanelID, labelText1, 0, 5, 2, 1);
         labelText2.setHorizontalAlignment(JLabel.CENTER);
-        AddComponent.add(jPanelID,labelText2, 0, 6, 1, 1);
+        AddComponent.add(jPanelID, labelText2, 0, 6, 1, 1);
         labelText3.setHorizontalAlignment(JLabel.CENTER);
-        AddComponent.add(jPanelID,labelText3, 1, 6, 1, 1);
+        AddComponent.add(jPanelID, labelText3, 1, 6, 1, 1);
         String[] markString = {"-", "4", "5", "6", "7", "8", "9", "10"};
-        for (int exam=0; exam < tableModel.getNumberExaminations();exam++){
+        for (int exam = 0; exam < tableModel.getNumberExaminations(); exam++) {
             JTextField jtfName = new JTextField(30);
             JComboBox jcbMark = new JComboBox(markString);
             examinationsMap.put(jtfName, jcbMark);
-            AddComponent.add(jPanelID, jtfName, 0, exam+7, 1, 1);
-            AddComponent.add(jPanelID, jcbMark, 1, exam+7, 2, 1);
+            AddComponent.add(jPanelID, jtfName, 0, exam + 7, 1, 1);
+            AddComponent.add(jPanelID, jcbMark, 1, exam + 7, 2, 1);
         }
         frame.add(jPanelID, BorderLayout.NORTH);
         JButton okButton = new JButton("OK");
@@ -76,15 +79,14 @@ public class AddDialog implements Observer{
     }
 
     private void createNewStudent() {
-        if (!isAllCorrect()){
+        if (!isAllCorrect()) {
             JOptionPane.showMessageDialog
                     (null, message_1, error, JOptionPane.ERROR_MESSAGE);
-        } else
-        {
+        } else {
             List<Examination> examinations = new ArrayList<>();
-            for (Map.Entry exam: examinationsMap.entrySet()) {
-                JTextField name = (JTextField)exam.getKey();
-                JComboBox mark = (JComboBox)exam.getValue();
+            for (Map.Entry exam : examinationsMap.entrySet()) {
+                JTextField name = (JTextField) exam.getKey();
+                JComboBox mark = (JComboBox) exam.getValue();
                 if (!name.getText().equals("")) {
                     examinations.add(new Examination(name.getText(),
                             Integer.parseInt((String) mark.getSelectedItem())));
@@ -119,10 +121,10 @@ public class AddDialog implements Observer{
     }
 
     private boolean isNotCorrectExaminations() {
-        for (Map.Entry exam: examinationsMap.entrySet()) {
-            JTextField name = (JTextField)exam.getKey();
-            JComboBox mark = (JComboBox)exam.getValue();
-            if (isNotCorrectExamination(name.getText(), (String)mark.getSelectedItem())) return true;
+        for (Map.Entry exam : examinationsMap.entrySet()) {
+            JTextField name = (JTextField) exam.getKey();
+            JComboBox mark = (JComboBox) exam.getValue();
+            if (isNotCorrectExamination(name.getText(), (String) mark.getSelectedItem())) return true;
         }
         return false;
     }
@@ -133,7 +135,7 @@ public class AddDialog implements Observer{
                 (name.length() > 0 && name.charAt(0) == ' '));
     }
 
-    public void updateComponent(){
+    public void updateComponent() {
         LAST_NAME = internationalization.getLang().getString("last_name");
         FIRST_NAME = internationalization.getLang().getString("first_name");
         MIDDLE_NAME = internationalization.getLang().getString("middle_name");
@@ -145,10 +147,14 @@ public class AddDialog implements Observer{
         labelText3.setText(internationalization.getLang().getString("mark"));
         message_1 = internationalization.getLang().getString("message_1");
         error = internationalization.getLang().getString("error");
+        frame.dispose();
+        frame.setVisible(true);
+        createFrame();
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        if ( ((Internationalization) o).getState() == true ) {updateComponent();}
+        System.out.println("addDialog change languige");
+        updateComponent();
     }
 }

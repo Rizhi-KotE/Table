@@ -38,10 +38,9 @@ public class MainWindow extends JComponent implements Observer {
     public MainWindow(Internationalization internationalization, StudentTableWithPaging studentTableWithPaging) {
         this.internationalization = internationalization;
         frame = new JFrame(internationalization.getLang().getString("st_table"));
-        frame.setSize(screenSize.width, screenSize.height);
+        frame.setSize(640, 360);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(createToolBar(), BorderLayout.PAGE_START);
-        frame.setMinimumSize(new Dimension(screenSize.width, screenSize.height));
         setStudentTableWithPaging(studentTableWithPaging);
         frame.setVisible(true);
     }

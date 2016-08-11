@@ -16,10 +16,12 @@ public class Internationalization extends Observable {
         return lang;
     }
 
-    void setLang(String langType) {
+    public void setLang(String langType) {
         if (langType == "ru") {
+            System.out.println("Change to ru");
             lang = lang_ru;
         } else if (langType == "eng") {
+            System.out.println("Change to eng");
             lang = lang_en;
         } else {
             System.err.print("not support languige");

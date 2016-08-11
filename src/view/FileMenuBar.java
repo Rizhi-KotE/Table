@@ -61,6 +61,7 @@ public class FileMenuBar implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("change languige in MenuBar");
         fileMenu.setText(internationalization.getLang().getString("file"));
         openFile.setText(internationalization.getLang().getString("open"));
         saveFile.setText(internationalization.getLang().getString("save"));
