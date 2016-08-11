@@ -42,8 +42,8 @@ public class SearchDialog extends JComponent implements Observer{
         frame.setLocationRelativeTo(studentTableWithPaging);
         frame.setResizable(false);
         frame.setVisible(true);
-        search = internationalization.getLang().getString("search_st");
-        remove = internationalization.getLang().getString("remove_st");
+        search = internationalization.lang.getString("search_st");
+        remove = internationalization.lang.getString("remove_st");
     }
 
     private JFrame createFrame(){
@@ -60,7 +60,7 @@ public class SearchDialog extends JComponent implements Observer{
         jPanelID.setLayout(new GridBagLayout());
         labelText.setHorizontalAlignment(JLabel.CENTER);
         AddComponent.add(jPanelID,labelText, 0, 0, 3, 1);
-        String[] labelString = {internationalization.getLang().getString("last_name") + ":", internationalization.getLang().getString("group") + ":"};
+        String[] labelString = {internationalization.lang.getString("last_name") + ":", internationalization.lang.getString("group") + ":"};
         labelText = new JLabel(labelString[0]);
         AddComponent.add(jPanelID,labelText, 0, 1, 1, 1);
         lastName = new JTextField(30);
@@ -70,14 +70,14 @@ public class SearchDialog extends JComponent implements Observer{
         group = new JTextField(30);
         AddComponent.add(jPanelID, group, 1, 2, 3, 1);
         String[] markString = {"-", "4", "5", "6", "7", "8", "9", "10"};
-        labelText = new JLabel(internationalization.getLang().getString("middle_mark") + "(" + internationalization.getLang().getString("less") + "/" + internationalization.getLang().getString("great") + ")");
+        labelText = new JLabel(internationalization.lang.getString("middle_mark") + "(" + internationalization.lang.getString("less") + "/" + internationalization.lang.getString("great") + ")");
         labelText.setHorizontalAlignment(JLabel.CENTER);
         AddComponent.add(jPanelID,labelText, 0, 3, 1, 1);
         minMiddleMark = new JComboBox(markString);
         AddComponent.add(jPanelID, minMiddleMark, 1, 3, 1, 1);
         maxMiddleMark = new JComboBox(markString);
         AddComponent.add(jPanelID, maxMiddleMark, 2, 3, 1, 1);
-        labelText = new JLabel(internationalization.getLang().getString("mark") + "(" + internationalization.getLang().getString("less") + "/" + internationalization.getLang().getString("great") + ")");
+        labelText = new JLabel(internationalization.lang.getString("mark") + "(" + internationalization.lang.getString("less") + "/" + internationalization.lang.getString("great") + ")");
         labelText.setHorizontalAlignment(JLabel.CENTER);
         AddComponent.add(jPanelID,labelText, 0, 4, 1, 1);
         minMark = new JComboBox(markString);
@@ -117,7 +117,7 @@ public class SearchDialog extends JComponent implements Observer{
             frame.repaint();
         } else {
             JOptionPane.showMessageDialog
-                    (null, internationalization.getLang().getString("message_1"), internationalization.getLang().getString("error"), JOptionPane.ERROR_MESSAGE);
+                    (null, internationalization.lang.getString("message_1"), internationalization.lang.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -136,14 +136,14 @@ public class SearchDialog extends JComponent implements Observer{
             studentTableWithPaging.updateComponent();
             if (counterStudent > 0) {
                 JOptionPane.showMessageDialog
-                        (null,  counterStudent  + " " + internationalization.getLang().getString("st") + " " + " " + internationalization.getLang().getString("deleted"), internationalization.getLang().getString("info"), JOptionPane.INFORMATION_MESSAGE);
+                        (null,  counterStudent  + " " + internationalization.lang.getString("st") + " " + " " + internationalization.lang.getString("deleted"), internationalization.lang.getString("info"), JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog
-                        (null, internationalization.getLang().getString("message_4"), internationalization.getLang().getString("warning"), JOptionPane.WARNING_MESSAGE);
+                        (null, internationalization.lang.getString("message_4"), internationalization.lang.getString("warning"), JOptionPane.WARNING_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog
-                    (null, internationalization.getLang().getString("message_1"), internationalization.getLang().getString("error"), JOptionPane.ERROR_MESSAGE);
+                    (null, internationalization.lang.getString("message_1"), internationalization.lang.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
     }
 

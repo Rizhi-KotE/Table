@@ -42,9 +42,9 @@ public class FileHandler implements Observer{
 
 
     public FileHandler(Internationalization internationalization){
-        message_2 = internationalization.getLang().getString("message_2");
-        message_3 = internationalization.getLang().getString("message_3");
-        error = internationalization.getLang().getString("error");
+        message_2 = internationalization.lang.getString("message_2");
+        message_3 = internationalization.lang.getString("message_3");
+        error = internationalization.lang.getString("error");
     }
 
     private void setMainWindow(MainWindow mainWindow) {

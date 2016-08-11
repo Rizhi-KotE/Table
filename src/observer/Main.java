@@ -15,10 +15,12 @@ public class Main {
         mainWindow.setFileHandler(fileHandler);
         mainWindow.setFileMenu(new FileMenuBar(fileHandler, internationalization).getMenuBar());
         AddDialog addDialog = new AddDialog(studentTableWithPaging);
+        FileMenuBar fileMenuBar = new FileMenuBar(fileHandler, internationalization);
         internationalization.addObserver(mainWindow);
         internationalization.addObserver(studentTableWithPaging);
         internationalization.addObserver(addDialog);
         internationalization.addObserver(fileHandler);
+        internationalization.addObserver(fileMenuBar);
         mainWindow.frame.setVisible(true);
         //internationalization.addObserver(searchDialog);
         System.out.println("Program was started");
