@@ -40,8 +40,7 @@ public class SearchDialog extends JComponent implements Observer{
         frame = createFrame();
         frame.pack();
         frame.setLocationRelativeTo(studentTableWithPaging);
-        frame.setResizable(false);
-        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         search = internationalization.getLang().getString("search_st");
         remove = internationalization.getLang().getString("remove_st");
     }
@@ -203,5 +202,10 @@ public class SearchDialog extends JComponent implements Observer{
     @Override
     public void update(Observable o, Object arg) {
 
+    }
+
+    @Override
+    public void setVisible(boolean aFlag) {
+        frame.setVisible(aFlag);
     }
 }

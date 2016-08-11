@@ -5,13 +5,13 @@ import observer.Main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
 public class MainWindow extends JComponent implements Observer {
+    private ToolBar toolBar;
     private FileHandler fileHandler;
+    private AddDialog addDialog;
 
     public void setFileHandler(FileHandler fileHandler) {
         this.fileHandler = fileHandler;
@@ -40,7 +40,6 @@ public class MainWindow extends JComponent implements Observer {
         frame = new JFrame(internationalization.getLang().getString("st_table"));
         frame.setSize(640, 360);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(createToolBar(), BorderLayout.PAGE_START);
         setStudentTableWithPaging(studentTableWithPaging);
         frame.setVisible(true);
     }
@@ -50,35 +49,9 @@ public class MainWindow extends JComponent implements Observer {
         frame.repaint();
     }
 
-    private JToolBar createToolBar() {
-        JToolBar toolBar = new JToolBar();
-        toolBar.add(AddComponent.makeButton(new JButton(), "SAVE.png", new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                fileHandler.saveFile();
-            }
-        }));
-        toolBar.add(AddComponent.makeButton(new JButton(), "OPEN.png", new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                fileHandler.openFile();
-            }
-        }));
-        toolBar.addSeparator();
-        toolBar.add(AddComponent.makeButton(new JButton(), "SEARCH.png", new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new SearchDialog(MainWindow.this, "SEARCH_MODE", studentTableWithPaging , internationalization);
-            }
-        }));
-        toolBar.add(AddComponent.makeButton(new JButton(), "ADD.png", new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new AddDialog(studentTableWithPaging, internationalization);
-            }
-        }));
-        toolBar.add(AddComponent.makeButton(new JButton(), "REMOVE.png", new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new SearchDialog(MainWindow.this, "REMOVE_MODE", studentTableWithPaging , internationalization);
-            }
-        }));
-        return toolBar;
+    public void setToolBar(ToolBar toolBar) {
+        this.toolBar = toolBar;
+        frame.add(toolBar.createToolBar(), BorderLayout.PAGE_START);
     }
 
     public StudentTableWithPaging getStudentTableWithPaging() {

@@ -1,11 +1,9 @@
 package observer;
 
-import controller.AddDialog;
-import controller.FileHandler;
-import controller.Internationalization;
-import controller.StudentTableWithPaging;
+import controller.*;
 import view.FileMenuBar;
 import view.MainWindow;
+import view.ToolBar;
 
 public class Main {
     public static String mode;
@@ -15,7 +13,6 @@ public class Main {
         //Observer
         Internationalization internationalization = new Internationalization();
         createWindow(internationalization);
-        internationalization.setLang("eng");
     }
 
     private static void createWindow(Internationalization internationalization) {
@@ -25,12 +22,22 @@ public class Main {
         mainWindow.setFileHandler(fileHandler);
         FileMenuBar fileMenuBar = new FileMenuBar(fileHandler, internationalization);
         mainWindow.setFileMenu(fileMenuBar.getMenuBar());
+
         AddDialog addDialog = new AddDialog(studentTableWithPaging, internationalization);
+        SearchDialog searchDialog = new SearchDialog(mainWindow, "SEARCJ_MODE", studentTableWithPaging, internationalization);
+        SearchDialog removeDialog = new SearchDialog(mainWindow, "REMOVE_MODE", studentTableWithPaging, internationalization);
+        ToolBar toolBar = new ToolBar(fileHandler, searchDialog, addDialog, removeDialog);
+
+        mainWindow.setToolBar(toolBar);
         internationalization.addObserver(mainWindow);
         internationalization.addObserver(studentTableWithPaging);
         internationalization.addObserver(addDialog);
         internationalization.addObserver(fileHandler);
         internationalization.addObserver(fileMenuBar);
+        internationalization.addObserver(toolBar);
+        internationalization.addObserver(searchDialog);
+        internationalization.addObserver(removeDialog);
+
         mainWindow.frame.setVisible(true);
         //internationalization.addObserver(searchDialog);
         System.out.println("Program was started");

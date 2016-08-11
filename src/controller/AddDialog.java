@@ -50,8 +50,7 @@ public class AddDialog implements Observer {
         JFrame frame = createFrame();
         frame.pack();
         frame.setLocationRelativeTo(studentTableWithPaging);
-        frame.setResizable(false);
-        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     private JFrame createFrame() {
@@ -161,9 +160,6 @@ public class AddDialog implements Observer {
         labelText3.setText(internationalization.getLang().getString("mark"));
         message_1 = internationalization.getLang().getString("message_1");
         error = internationalization.getLang().getString("error");
-        frame.dispose();
-        frame.setVisible(true);
-        createFrame();
     }
 
     @Override
@@ -171,4 +167,9 @@ public class AddDialog implements Observer {
         System.out.println("addDialog change languige");
         updateComponent();
     }
+
+    public void setVisibleTrue(){
+        frame.setVisible(true);
+    }
+
 }
