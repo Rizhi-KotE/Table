@@ -18,10 +18,10 @@ public class AddDialog implements Observer {
     private TableModel tableModel;
     private Map<String, JTextField> fieldID = new HashMap<String, JTextField>();
     private Map<JTextField, JComboBox> examinationsMap = new HashMap<JTextField, JComboBox>();
-    private String LAST_NAME;
-    private String FIRST_NAME;
-    private String MIDDLE_NAME;
-    private String GROUP;
+    private final String LAST_NAME = "last_name";
+    private final String FIRST_NAME = "first_name";
+    private final String MIDDLE_NAME = "middle_name";
+    private final String GROUP = "group";
     private JFrame frame;
     private JLabel labelText;
     private JLabel labelText1;
@@ -30,13 +30,11 @@ public class AddDialog implements Observer {
     private String message_1;
     private String error;
 
+    private Map<String , JLabel> labelMap = new HashMap<>();
+
     public AddDialog(StudentTableWithPaging studentTableWithPaging, Internationalization internationalization) {
         this.studentTableWithPaging = studentTableWithPaging;
         this.internationalization = internationalization;
-        LAST_NAME = internationalization.getLang().getString("last_name");
-        FIRST_NAME = internationalization.getLang().getString("first_name");
-        MIDDLE_NAME = internationalization.getLang().getString("middle_name");
-        GROUP = internationalization.getLang().getString("group");
         frame = new JFrame(internationalization.getLang().getString("add_st"));
         labelText = new JLabel(internationalization.getLang().getString("add_new_st"));
         labelText1 = new JLabel(internationalization.getLang().getString("examinations"));
@@ -60,7 +58,8 @@ public class AddDialog implements Observer {
         AddComponent.add(jPanelID, labelText, 0, 0, 2, 1);
         String[] labelString = {LAST_NAME, FIRST_NAME, MIDDLE_NAME, GROUP};
         for (int field = 0; field < labelString.length; field++) {
-            labelText = new JLabel(labelString[field]);
+            JLabel labelText = new JLabel(internationalization.getLang().getString(labelString[field]));
+            labelMap.put(labelString[field], labelText);
             AddComponent.add(jPanelID, labelText, 0, field + 1, 1, 1);
             JTextField jtfField = new JTextField(30);
             fieldID.put(labelString[field], jtfField);
@@ -149,10 +148,6 @@ public class AddDialog implements Observer {
     }
 
     public void updateComponent() {
-        LAST_NAME = internationalization.getLang().getString("last_name");
-        FIRST_NAME = internationalization.getLang().getString("first_name");
-        MIDDLE_NAME = internationalization.getLang().getString("middle_name");
-        GROUP = internationalization.getLang().getString("group");
         frame.setTitle(internationalization.getLang().getString("add_st"));
         labelText.setText(internationalization.getLang().getString("add_new_st"));
         labelText1.setText(internationalization.getLang().getString("examinations"));
@@ -160,6 +155,7 @@ public class AddDialog implements Observer {
         labelText3.setText(internationalization.getLang().getString("mark"));
         message_1 = internationalization.getLang().getString("message_1");
         error = internationalization.getLang().getString("error");
+        labelMap.forEach((s, jLabel) -> jLabel.setText(internationalization.getLang().getString(s)));
     }
 
     @Override

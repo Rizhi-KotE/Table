@@ -29,6 +29,7 @@ public class Main {
         ToolBar toolBar = new ToolBar(fileHandler, searchDialog, addDialog, removeDialog);
 
         mainWindow.setToolBar(toolBar);
+
         internationalization.addObserver(mainWindow);
         internationalization.addObserver(studentTableWithPaging);
         internationalization.addObserver(addDialog);
