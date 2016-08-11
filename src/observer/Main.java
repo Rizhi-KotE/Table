@@ -25,7 +25,7 @@ public class Main {
         mainWindow.setFileHandler(fileHandler);
         FileMenuBar fileMenuBar = new FileMenuBar(fileHandler, internationalization);
         mainWindow.setFileMenu(fileMenuBar.getMenuBar());
-        AddDialog addDialog = new AddDialog(studentTableWithPaging);
+        AddDialog addDialog = new AddDialog(studentTableWithPaging, internationalization);
         internationalization.addObserver(mainWindow);
         internationalization.addObserver(studentTableWithPaging);
         internationalization.addObserver(addDialog);

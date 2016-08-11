@@ -13,25 +13,39 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class AddDialog implements Observer {
-    private static Internationalization internationalization = new Internationalization();
-    private static String LAST_NAME = internationalization.getLang().getString("last_name");
-    private static String FIRST_NAME = internationalization.getLang().getString("first_name");
-    private static String MIDDLE_NAME = internationalization.getLang().getString("middle_name");
-    private static String GROUP = internationalization.getLang().getString("group");
-    public JFrame frame = new JFrame(internationalization.getLang().getString("add_st"));
-    public JLabel labelText = new JLabel(internationalization.getLang().getString("add_new_st"));
-    public JLabel labelText1 = new JLabel(internationalization.getLang().getString("examinations"));
-    public JLabel labelText2 = new JLabel(internationalization.getLang().getString("name"));
-    public JLabel labelText3 = new JLabel(internationalization.getLang().getString("mark"));
-    public String message_1 = internationalization.getLang().getString("message_1");
-    public String error = internationalization.getLang().getString("error");
+    private Internationalization internationalization;
     private StudentTableWithPaging studentTableWithPaging;
     private TableModel tableModel;
     private Map<String, JTextField> fieldID = new HashMap<String, JTextField>();
     private Map<JTextField, JComboBox> examinationsMap = new HashMap<JTextField, JComboBox>();
+    private String LAST_NAME;
+    private String FIRST_NAME;
+    private String MIDDLE_NAME;
+    private String GROUP;
+    private JFrame frame;
+    private JLabel labelText;
+    private JLabel labelText1;
+    private JLabel labelText2;
+    private JLabel labelText3;
+    private String message_1;
+    private String error;
 
-    public AddDialog(StudentTableWithPaging studentTableWithPaging) {
+    public AddDialog(StudentTableWithPaging studentTableWithPaging, Internationalization internationalization) {
         this.studentTableWithPaging = studentTableWithPaging;
+        this.internationalization = internationalization;
+        LAST_NAME = internationalization.getLang().getString("last_name");
+        FIRST_NAME = internationalization.getLang().getString("first_name");
+        MIDDLE_NAME = internationalization.getLang().getString("middle_name");
+        GROUP = internationalization.getLang().getString("group");
+        frame = new JFrame(internationalization.getLang().getString("add_st"));
+        labelText = new JLabel(internationalization.getLang().getString("add_new_st"));
+        labelText1 = new JLabel(internationalization.getLang().getString("examinations"));
+        labelText2 = new JLabel(internationalization.getLang().getString("name"));
+        labelText3 = new JLabel(internationalization.getLang().getString("mark"));
+        message_1 = internationalization.getLang().getString("message_1");
+        error = internationalization.getLang().getString("error");
+
+
         tableModel = studentTableWithPaging.getTableModel();
         JFrame frame = createFrame();
         frame.pack();

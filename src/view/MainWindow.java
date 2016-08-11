@@ -70,7 +70,7 @@ public class MainWindow extends JComponent implements Observer {
         }));
         toolBar.add(AddComponent.makeButton(new JButton(), "ADD.png", new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new AddDialog(studentTableWithPaging);
+                new AddDialog(studentTableWithPaging, internationalization);
             }
         }));
         toolBar.add(AddComponent.makeButton(new JButton(), "REMOVE.png", new ActionListener() {
