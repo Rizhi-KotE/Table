@@ -51,13 +51,13 @@ public class StudentTableWithPaging extends JComponent implements Observer{
         table.setLayout(new GridBagLayout());
         int numberExaminations = tableModel.getNumberExaminations();
         List<Student> students = tableModel.getStudents();
-        AddComponent.add(table, internationalization.lang.getString("full_name"), 0, 0, 1, 3);
-        AddComponent.add(table, internationalization.lang.getString("group"), 1, 0, 1, 3);
-        AddComponent.add(table, internationalization.lang.getString("examinations"), 2, 0, numberExaminations * 2, 1);
+        AddComponent.add(table, internationalization.getLang().getString("full_name"), 0, 0, 1, 3);
+        AddComponent.add(table, internationalization.getLang().getString("group"), 1, 0, 1, 3);
+        AddComponent.add(table, internationalization.getLang().getString("examinations"), 2, 0, numberExaminations * 2, 1);
         for (int i = 0, x = 2; i < numberExaminations; i++, x += 2) {
             AddComponent.add(table, Integer.toString(i + 1), x, 1, 2, 1);
-            AddComponent.add(table, internationalization.lang.getString("name"), x, 2, 1, 1);
-            AddComponent.add(table, internationalization.lang.getString("mark"), x + 1, 2, 1, 1);
+            AddComponent.add(table, internationalization.getLang().getString("name"), x, 2, 1, 1);
+            AddComponent.add(table, internationalization.getLang().getString("mark"), x + 1, 2, 1, 1);
         }
         int firstStudentOnPage = studentOnPage * (currentPage - 1);
         int lineInHeaderTable = 3;
@@ -78,8 +78,8 @@ public class StudentTableWithPaging extends JComponent implements Observer{
         List<Student> students = tableModel.getStudents();
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        String statusBar = internationalization.lang.getString("page") + ": " + currentPage + "/" + getNumberMaxPage()
-                + "   " + internationalization.lang.getString("records") + ": " + students.size() + " ";
+        String statusBar = internationalization.getLang().getString("page") + ": " + currentPage + "/" + getNumberMaxPage()
+                + "   " + internationalization.getLang().getString("records") + ": " + students.size() + " ";
         panel.add(new JLabel(statusBar));
         panel.add(AddComponent.makeButton(new JButton(), "FIRST_12.png", new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -101,7 +101,7 @@ public class StudentTableWithPaging extends JComponent implements Observer{
                 lastPage();
             }
         }));
-        JLabel label = new JLabel(" " + internationalization.lang.getString("students") + ": ");
+        JLabel label = new JLabel(" " + internationalization.getLang().getString("students") + ": ");
         panel.add(label);
         String[] sizeStudent = {"10", "20", "30", "50", "100"};
         JComboBox sizeBox = new JComboBox(sizeStudent);
@@ -113,7 +113,7 @@ public class StudentTableWithPaging extends JComponent implements Observer{
             }
         });
         panel.add(sizeBox);
-        label = new JLabel("   " + internationalization.lang.getString("exams") + ": ");
+        label = new JLabel("   " + internationalization.getLang().getString("exams") + ": ");
         panel.add(label);
         String[] sizeExam = {"5", "6", "7", "8", "9", "10", "12", "15", "20"};
         JComboBox examBox = new JComboBox(sizeExam);
@@ -127,7 +127,7 @@ public class StudentTableWithPaging extends JComponent implements Observer{
         panel.add(examBox);
         ImageIcon iconRU = new ImageIcon("img/RU.png");
         ImageIcon iconUK = new ImageIcon("img/UK.png");
-        String selected_lang = "   " + internationalization.lang.getString("lang");
+        String selected_lang = "   " + internationalization.getLang().getString("lang");
         JLabel label_lang = new JLabel(selected_lang);
         panel.add(label_lang);
         JComboBox c = new JComboBox();
@@ -139,17 +139,12 @@ public class StudentTableWithPaging extends JComponent implements Observer{
             public void actionPerformed(ActionEvent e) {
                 i = c.getSelectedIndex();
                 if (i == 0) {
-                    internationalization.setDefaultLanguage(internationalization.lang_ru);
-                    System.out.println(internationalization.lang.getString("lang") + " : Русский");
-                    internationalization.setLang(true);
-                    internationalization.notifyObservers();
+                    internationalization.setLang("ru");
+                    System.out.println(internationalization.getLang().getString("lang") + " : Русский");
                 }
                 if (i == 1) {
-                    internationalization.setDefaultLanguage(internationalization.lang_en);
-                    System.out.println(internationalization.lang.getString("lang") + " : English");
-                    internationalization.setLang(true) ;
-                    internationalization.notifyObservers();
-                    updateComponent();
+                    internationalization.setLang("eng");
+                    System.out.println(internationalization.getLang().getString("lang") + " : English");
                 }
             }
         });
@@ -264,8 +259,8 @@ public class StudentTableWithPaging extends JComponent implements Observer{
             updateComponent();
         } else {
             JOptionPane.showMessageDialog
-                    (null, internationalization.lang.getString("message_5") + " " + tableModel.getNumberMaxExaminations(),
-                            internationalization.lang.getString("error"), JOptionPane.ERROR_MESSAGE | JOptionPane.OK_OPTION);
+                    (null, internationalization.getLang().getString("message_5") + " " + tableModel.getNumberMaxExaminations(),
+                            internationalization.getLang().getString("error"), JOptionPane.ERROR_MESSAGE | JOptionPane.OK_OPTION);
         }
     }
 

@@ -11,21 +11,21 @@ import java.util.regex.Pattern;
 
 public class AddDialog implements Observer{
     private static Internationalization internationalization = new Internationalization();
-    private static  String LAST_NAME = internationalization.lang.getString("last_name");
-    private static  String FIRST_NAME = internationalization.lang.getString("first_name");
-    private static  String MIDDLE_NAME = internationalization.lang.getString("middle_name");
-    private static  String GROUP = internationalization.lang.getString("group");
+    private static  String LAST_NAME = internationalization.getLang().getString("last_name");
+    private static  String FIRST_NAME = internationalization.getLang().getString("first_name");
+    private static  String MIDDLE_NAME = internationalization.getLang().getString("middle_name");
+    private static  String GROUP = internationalization.getLang().getString("group");
     private StudentTableWithPaging studentTableWithPaging;
     private TableModel tableModel;
     private Map<String, JTextField> fieldID = new HashMap<String, JTextField>();
     private Map<JTextField, JComboBox> examinationsMap = new HashMap<JTextField, JComboBox>();
-    public JFrame frame = new JFrame(internationalization.lang.getString("add_st"));
-    public JLabel labelText = new JLabel(internationalization.lang.getString("add_new_st"));
-    public JLabel labelText1 = new JLabel(internationalization.lang.getString("examinations"));
-    public JLabel labelText2 = new JLabel(internationalization.lang.getString("name"));
-    public JLabel labelText3 = new JLabel(internationalization.lang.getString("mark"));
-    public String message_1 = internationalization.lang.getString("message_1");
-    public String error = internationalization.lang.getString("error");
+    public JFrame frame = new JFrame(internationalization.getLang().getString("add_st"));
+    public JLabel labelText = new JLabel(internationalization.getLang().getString("add_new_st"));
+    public JLabel labelText1 = new JLabel(internationalization.getLang().getString("examinations"));
+    public JLabel labelText2 = new JLabel(internationalization.getLang().getString("name"));
+    public JLabel labelText3 = new JLabel(internationalization.getLang().getString("mark"));
+    public String message_1 = internationalization.getLang().getString("message_1");
+    public String error = internationalization.getLang().getString("error");
 
     public AddDialog(StudentTableWithPaging studentTableWithPaging) {
         this.studentTableWithPaging = studentTableWithPaging;
@@ -134,23 +134,21 @@ public class AddDialog implements Observer{
     }
 
     public void updateComponent(){
-        System.out.println(internationalization.lang.getString("lang"));
-        LAST_NAME = internationalization.lang.getString("last_name");
-        FIRST_NAME = internationalization.lang.getString("first_name");
-        MIDDLE_NAME = internationalization.lang.getString("middle_name");
-        GROUP = internationalization.lang.getString("group");
-        frame.setTitle(internationalization.lang.getString("add_st"));
-        labelText.setText(internationalization.lang.getString("add_new_st"));
-        labelText1.setText(internationalization.lang.getString("examinations"));
-        labelText2.setText(internationalization.lang.getString("name"));
-        labelText3.setText(internationalization.lang.getString("mark"));
-        message_1 = internationalization.lang.getString("message_1");
-        error = internationalization.lang.getString("error");
+        LAST_NAME = internationalization.getLang().getString("last_name");
+        FIRST_NAME = internationalization.getLang().getString("first_name");
+        MIDDLE_NAME = internationalization.getLang().getString("middle_name");
+        GROUP = internationalization.getLang().getString("group");
+        frame.setTitle(internationalization.getLang().getString("add_st"));
+        labelText.setText(internationalization.getLang().getString("add_new_st"));
+        labelText1.setText(internationalization.getLang().getString("examinations"));
+        labelText2.setText(internationalization.getLang().getString("name"));
+        labelText3.setText(internationalization.getLang().getString("mark"));
+        message_1 = internationalization.getLang().getString("message_1");
+        error = internationalization.getLang().getString("error");
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("vvv");
-        updateComponent();
+        if ( ((Internationalization) o).getState() == true ) {updateComponent();}
     }
 }

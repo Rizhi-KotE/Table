@@ -37,7 +37,7 @@ public class MainWindow extends JComponent implements Observer {
 
     public MainWindow(Internationalization internationalization, StudentTableWithPaging studentTableWithPaging) {
         this.internationalization = internationalization;
-        frame = new JFrame(internationalization.lang.getString("st_table"));
+        frame = new JFrame(internationalization.getLang().getString("st_table"));
         frame.setSize(screenSize.width, screenSize.height);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(createToolBar(), BorderLayout.PAGE_START);
@@ -87,7 +87,7 @@ public class MainWindow extends JComponent implements Observer {
     }
 
     public void updateComponent() {
-        frame.setTitle(internationalization.lang.getString("st_table"));
+        frame.setTitle(internationalization.getLang().getString("st_table"));
 
     }
     public static void main(String[] args) {
@@ -97,6 +97,6 @@ public class MainWindow extends JComponent implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        updateComponent();
+
     }
 }

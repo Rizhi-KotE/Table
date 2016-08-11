@@ -7,23 +7,29 @@ import java.util.ResourceBundle;
 public class Internationalization extends Observable {
     private Boolean langWasChanged = false;
     private Locale russian = new Locale("ru", "RU");
-    private Locale english = new Locale("en", "US");
     ResourceBundle lang_ru = ResourceBundle.getBundle("bundles.Locale_ru", russian);
+    private Locale english = new Locale("en", "US");
     ResourceBundle lang_en = ResourceBundle.getBundle("bundles.Locale_en", english);
-    public ResourceBundle lang;
-    public Internationalization(){
-        setDefaultLanguage(lang_ru);
+    private ResourceBundle lang = lang_ru;
+
+    public ResourceBundle getLang() {
+        return lang;
     }
-    void setLang(Boolean langWasChanged){
-        this.langWasChanged = langWasChanged;
+
+    void setLang(String langType) {
+        if (langType == "ru") {
+            lang = lang_ru;
+        } else if (langType == "eng") {
+            lang = lang_en;
+        } else {
+            System.err.print("not support languige");
+            return;
+        }
         super.setChanged();
+        notifyObservers();
     }
 
-    void setDefaultLanguage(ResourceBundle lang){
-        this.lang = lang;
-    }
-
-    Boolean getState(){
+    Boolean getState() {
         return langWasChanged;
     }
 }

@@ -30,12 +30,12 @@ public class FileMenuBar implements Observer {
 
     private void createFileMenu(FileHandler fileHandler, Internationalization internationalization) {
         ImageIcon iconOpen = new ImageIcon("img/OPEN.png");
-        openFile = new JMenuItem(internationalization.lang.getString("open"), iconOpen);
+        openFile = new JMenuItem(internationalization.getLang().getString("open"), iconOpen);
         ImageIcon iconSave = new ImageIcon("img/SAVE.png");
-        saveFile = new JMenuItem(internationalization.lang.getString("save"), iconSave);
+        saveFile = new JMenuItem(internationalization.getLang().getString("save"), iconSave);
         ImageIcon iconExit = new ImageIcon("img/EXIT.png");
-        exit = new JMenuItem(internationalization.lang.getString("exit"), iconExit);
-        fileMenu = new JMenu(internationalization.lang.getString("file"));
+        exit = new JMenuItem(internationalization.getLang().getString("exit"), iconExit);
+        fileMenu = new JMenu(internationalization.getLang().getString("file"));
         openFile.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 fileHandler.openFile();
@@ -61,11 +61,10 @@ public class FileMenuBar implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("sss");
-        fileMenu.setText(internationalization.lang.getString("file"));
-        openFile.setText(internationalization.lang.getString("open"));
-        saveFile.setText(internationalization.lang.getString("save"));
-        exit.setText(internationalization.lang.getString("exit"));
+        fileMenu.setText(internationalization.getLang().getString("file"));
+        openFile.setText(internationalization.getLang().getString("open"));
+        saveFile.setText(internationalization.getLang().getString("save"));
+        exit.setText(internationalization.getLang().getString("exit"));
     }
 
 
